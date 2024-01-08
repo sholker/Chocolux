@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>UserDetails</title>
+
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css" />
+  <!--slick slider stylesheet -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
+  <!-- slick slider -->
+
+  <link rel="stylesheet" href="../static/css/slick-theme.css" />
+  <!-- font awesome style -->
+  <link href="../static/css/font-awesome.min.css" rel="stylesheet" />
+  <!-- Custom styles for this template -->
+  <link href="../static/css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="../static/css/responsive.css" rel="stylesheet" />
+  <link href="../static/css/login.css" rel="stylesheet" />
+
+</head>
+
+<body class="sub_page">
+
+  <div class="main_body_content">
+
+    <div class="hero_area">
+     {% include 'header.html' %}
+      <!-- end header section -->
+    </div>
+
+    <!-- about section -->
+
+      <div class="container login-container">
+         <div class="container">
+        <h2>User Details Form</h2>
+        <form method="post" action="/update_user">
+            <input type="hidden" name="user_id" value="{{ id }}">
+
+            <label hidden="hidden">"{{ userID }}" </label> <br>
+
+           <label for="userId">ID:</label>
+             <input  type="text" name="userId" value="{{ userId }}" readonly><br>
+
+            <label for="firstname">First Name:</label>
+             <input type="text" name="lastname" value="{{ lastname }}" required><br>
+
+            <label for="lastname">Last Name:</label>
+            <input type="text" name="lastname" value="{{ lastname }}" required><br>
+
+            <label for="email">Email:</label>
+            <input type="email" name="email" value="{{ email }}" required><br>
+
+          <label for="username">username:</label>
+            <input type="text" name="username" value="{{ username }}" required><br>
+
+            <div class="password-container">
+                <label for="password">Password:</label>
+                <div class="input-with-icon">
+                    <input type="password" id="password" name="password" value="{{ passwd }}" required>
+                    <i class="fa fa-eye-slash" aria-hidden="true" onclick="showHidePass()"></i>
+                </div>
+            </div>
+
+            <button type="submit">Update User</button>
+        </form>
+    </div>
+      </div>
+
+  </div>
+
+  {% include 'footer.html' %}
+
+  <!-- jQery -->
+  <script src="../static/js/jquery-3.4.1.min.js"></script>
+  <!-- bootstrap js -->
+  <script src="../static/js/bootstrap.js"></script>
+  <!-- slick slider -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js"></script>
+  <!-- custom js -->
+  <script src="../static/js/custom.js"></script>
+  <script  src="../static/js/userFeature.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main_body_content {
+    flex: 1;
+    margin-bottom: 100px; /* Adjust the margin-bottom as needed */
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Set the height to 100% of the viewport height */
+}
+
+.login-container form {
+    background-color: #503c32;
+
+    padding: 20px;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin-top: 10%; /* Adjust as needed */
+    margin-bottom: 10%; /* Adjust as needed */
+}
+
+.login-container h2 {
+    text-align: center;
+}
+
+.login-container label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+.login-container button {
+    background-color: #46200b;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.login-container p {
+    text-align: center;
+}
+
+.input-with-icon {
+    position: relative;
+}
+
+.input-with-icon input {
+    padding-right: 30px; /* Adjust the padding as needed */
+}
+
+.input-with-icon i {
+    color: #0c0c0c;
+    position: absolute;
+    top: 50%;
+    right: 5px; /* Adjust the right distance as needed */
+    transform: translateY(-80%);
+    cursor: pointer;
+}
