@@ -129,11 +129,17 @@ a:focus {
   text-align: center;
   text-transform: uppercase;
 }
-
+.fa:hover{
+    color: blanchedalmond;
+}
 .custom_nav-container .navbar-nav .nav-item:hover .nav-link {
-  color: #ffffff;
+  color: blanchedalmond;
 }
 
+
+.navbar-brand:hover {
+  color: blanchedalmond;
+}
 .navbar-brand {
   font-size: 28px;
   font-weight: bold;
@@ -141,34 +147,6 @@ a:focus {
   font-family: "SnellBT Regular", sans-serif;
 
 }
-
-/* Add this CSS code to style the user icon and menu */
-.user-icon {
-    position: relative;
-    cursor: pointer;
-}
-
-.user-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-}
-
-.user-menu a {
-    display: block;
-    padding: 10px;
-    text-decoration: none;
-    color: #333;
-}
-
-.user-menu a:hover {
-    background-color: #f0f0f0;
-}
-
 
 .quote_btn-container {
   display: -webkit-box;

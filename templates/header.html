@@ -46,6 +46,23 @@
                       {% endif %}
             </a>
 
+              <div>
+                 {% if userId %}
+                    <label>
+
+                        {% set current_hour = current_time.hour %}
+                        {% if current_hour < 12 %}
+                            Good morning ,
+                        {% elif current_hour < 17 %}
+                            Good afternoon,
+                        {% else %}
+                            Good evening,
+                        {% endif %}
+                        {{ fullname | default('Default Full Name') }}
+                    </label>
+                {% endif %}
+
+                  </div>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,14 +73,14 @@
               <ul class="navbar-nav ml-auto">
                   <li class="nav-item active">
                       {% if userId %}
-                          <a class="nav-link" href="/?userId={{ userId }}&fullname={{ fullname }}">Home <span class="sr-only">(current)</span></a>
+                          <a class="nav-link" href="/?userId={{ userId }}&fullname={{ fullname }}&current_time={{ current_time }}">Home <span class="sr-only">(current)</span></a>
                       {% else %}
                           <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                       {% endif %}
                   </li>
                 <li class="nav-item">
                   {% if userId %}
-                          <a class="nav-link" href="about?userId={{ userId }}&fullname={{ fullname }}">About <span class="sr-only">(current)</span></a>
+                          <a class="nav-link" href="about?userId={{ userId }}&fullname={{ fullname }}&current_time={{ current_time }}">About <span class="sr-only">(current)</span></a>
                       {% else %}
                           <a class="nav-link" href="about">About</a>
                       {% endif %}
@@ -87,14 +104,11 @@
 
                   {% if userId %}
 
-                 <div class="user-icon" onclick="userMenu()">
-                        <i class="fa fa-user" aria-hidden="true"></i>
-                        <div class="user-menu" id="userMenu">
-                            <a href="/userDetails?userId={{ userId }}&fullname={{ fullname }}">View Profile</a>
-                            <a href="/logout">Logout</a>
-                        </div>
-                    </div>
-                      <
+                      <a href="/userDetails?userId={{ userId }}&fullname={{ fullname }}&current_time={{ current_time }}">
+                          <i class="fa fa-user-circle" aria-hidden="true"></i>
+                      </a>
+                    <br>
+                  <a class="nav-link" href="/logout"> Logout </a>
                   {% else %}
                       <a href="login">
                           <i class="fa fa-user" aria-hidden="true"></i>

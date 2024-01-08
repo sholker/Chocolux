@@ -1,14 +1,15 @@
 from flask import Flask, request, render_template, abort
 from database_com import DatabaseConnection
+from datetime import datetime
 
 DB = DatabaseConnection()
 app = Flask(__name__,static_folder='static')
-
-
+current_time = datetime.now()
 ###### GET ######
 @app.route("/")
 def welcome():
-    return render_template("index.html",userId=request.args.get('userId', None), fullname=request.args.get('fullname', None))
+    return render_template("index.html", userId=request.args.get('userId', None),
+                           fullname=request.args.get('fullname', None), current_time=current_time)
 
 @app.route("/header")
 def header():
@@ -30,11 +31,13 @@ def user_details():
     # (17, 'admin', 'admin', 'admin@gmail.com', 'admin', 'admin', 1)
     user_id,firstname,lastname,email,username,passwd,is_admiin = user_details
 
-    return render_template('userDetails.html', userId=user_id, firstname=firstname,lastname=lastname,email=email,username=username,passwd=passwd)
+
+    return render_template('userDetails.html', userId=user_id, firstname=firstname,lastname=lastname,
+                           email=email,username=username,passwd=passwd,fullname=request.args.get('fullname',f"{firstname} {lastname}"),current_time=current_time)
 
 @app.route('/about')
 def about():
-    return render_template("about.html", userId=request.args.get('userId', None), fullname=request.args.get('fullname', None))
+    return render_template("about.html", userId=request.args.get('userId', None), fullname=request.args.get('fullname', None),current_time=current_time)
 
 @app.route('/addItem')
 def add_item():
@@ -51,7 +54,7 @@ def add_item():
 
 @app.route('/logout')
 def logout():
-    return render_template("index.html")
+    return render_template("login.html")
 
 
 ###### GET ######
@@ -74,7 +77,8 @@ def login():
 
         if is_exist:
             print(f"login successful for user {username} id = {result[0]}")
-            return render_template("index.html", userId=result[0], fullname=f"{result[1].title()} {result[2].title()}")
+
+            return render_template("index.html", userId=result[0], fullname=f"{result[1].title()} {result[2].title()}", current_time=current_time)
 
         return render_template("login.html", message=result)
 
@@ -93,8 +97,8 @@ def register():
         if not DB.table_exists(f"{table_name}"):
             print(f"creating table {table_name}")
             DB.create_table(
-                'users',
-                firstname={'type': 'VARCHAR(255)', 'unique': True},
+                table_name='users',
+                firstname={'type': 'VARCHAR(255)'},
                 lastname={'type': 'VARCHAR(255)'},
                 email={'type': 'VARCHAR(255)', 'unique': True},
                 username={'type': 'VARCHAR(255)', 'unique': True},
@@ -112,7 +116,7 @@ def register():
         else:
             print(f"Adding new record to {table_name} table")
             result, message = DB.insert_into_table(table_name, firstname=firstname, lastname=lastname, email=email,
-                                                   username=username, password=password,type=type)
+                                                   username=username, password=password,UserType=type)
             if result:
                 message = "New user created"
 
