@@ -131,10 +131,15 @@ def shop():
             quantity = request.form.get('quantity')
             print(f"adding item {item} to shopping cart x{quantity}")
             message = f"Adding to shopping cart x{quantity}"
-            print(message)
+            return render_template('chocolate.html', userId=request.form.get('userId'),
+                                   fullname=request.form.get('fullname'),
+                                   current_time=current_time, headers=headers, rows=rows, message=message)
 
-        return render_template('chocolate.html', userId=request.args.get('userId'), fullname=request.args.get('fullname'),
-                           current_time=current_time, headers=headers, rows=rows, message=message)
+        else:
+            return render_template('chocolate.html', userId=request.args.get('userId'),
+                               fullname=request.args.get('fullname'),
+                               current_time=current_time, headers=headers, rows=rows, message=message)
+
 
     except Exception as e:
         return render_template('chocolate.html', userId=request.args.get('userId'),

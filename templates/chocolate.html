@@ -42,6 +42,14 @@
                     {% for row in rows %}
                     <tr>
                         <form action="/shop" method="post">
+
+                            <input id="userId" name="userId" type="text" value="{{ userId }}" hidden="hidden">
+                            <input id="fullname" name="fullname" type="text" value="{{ fullname }}" hidden="hidden">
+
+
+
+
+
                         <td>{{ row[1] }}</td>
                             <input hidden="hidden" type="text" id="item_id" name="item_id" value="{{ row[0] }}">
                         <td><img src="{{ url_for('static', filename=row[4][7:]) }}" alt="Item Image" class="item-image" width="150" height="150">
