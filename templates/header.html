@@ -87,20 +87,18 @@
                 </li>
                     {% if is_admin %}
                         <li class="nav-item">
-                          <a class="nav-link" href="/addItem?userId={{ userId }}&fullname={{ fullname }}&
-                          is_admin={{ is_admin | default(False) }}&current_time={{ current_time }}">Add New Item</a>
+                          <a class="nav-link" href="/addItem?userId={{ userId }}&fullname={{ fullname }}&is_admin={{is_admin}}&current_time={{ current_time }}">Add New Item</a>
                         </li>
                   {% endif %}
 
                 <li class="nav-item">
-                  <a class="nav-link" href="chocolate.html">Chocolates</a>
+                     {% if userId %}
+                          <a class="nav-link" href="shop?userId={{ userId }}&fullname={{ fullname }}&is_admin={{ is_admin | default(False) }}&current_time={{ current_time }}">Chocolates <span class="sr-only">(current)</span></a>
+                      {% else %}
+                          <a class="nav-link" href="shop">Chocolates</a>
+                      {% endif %}
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="testimonial.html">Testimonial</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="contact.html">Contact Us</a>
-                </li>
+
               </ul>
               <div class="quote_btn-container">
                 <form class="form-inline">

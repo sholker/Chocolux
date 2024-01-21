@@ -98,6 +98,7 @@ class DatabaseConnection:
 
             # Removing the trailing comma and closing the query
             query = query.rstrip(', ') + ")"
+            print(f'query: {query}')
             self.open_connection()
             self.cursor.execute(query)
         except ms.Error as e:
@@ -150,11 +151,11 @@ class DatabaseConnection:
         finally:
             self.close_connection()
 
-    def search_in_table_by_fields(self, table_name, **fields):
+    def search_in_table_by_fields(self, table_name, **fields): #{'name': 'Ori', 'age': 20}
         try:
             if self.table_exists(table_name):
                 print(f"search_in_table_by_fields fields: {fields}")
-                conditions = ' AND '.join([f"{k} = '{v}' " for k, v in fields.items()])
+                conditions = ' AND '.join([f"{k} = '{v}' " for k, v in fields.items()]) # 'name = 'Ori' AND age = 20'
                 query = f"SELECT * FROM {table_name} WHERE {conditions}"
                 print(f"search_in_table_by_fields query: {query}")
 
@@ -171,6 +172,21 @@ class DatabaseConnection:
             else:
                 print(f"Table {table_name} does not exist")
                 return False, f"Table {table_name} does not exist"
+        except ms.Error as e:
+            return False, str(e)
+        finally:
+            self.close_connection()
+
+    def select_all_from_table(self, table_name):
+        try:
+            if self.table_exists(table_name):
+                query = f"SELECT * FROM {table_name}"
+                print(f"select_all_from_table query: {query}")
+                self.open_connection()
+                self.cursor.execute(query)
+                headers = [description[0] for description in self.cursor.description]
+                rows = self.cursor.fetchall()
+                return headers, rows
         except ms.Error as e:
             return False, str(e)
         finally:

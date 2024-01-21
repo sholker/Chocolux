@@ -14,8 +14,10 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh; /* Set the height to 100% of the viewport height */
+    margin-left: auto;
+    margin-right: auto;
 }
+
 
 .login-container form {
     background-color: #503c32;
@@ -54,8 +56,13 @@ body {
     width: 100%;
 }
 
+input
+{
+    background-color: transparent;
+}
 .login-container p {
     text-align: center;
+
 }
 
 .input-with-icon {

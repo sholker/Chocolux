@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>register</title>
+  <title>addNewItem</title>
   <!-- Basic -->
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,7 +12,6 @@
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-
 
 
   <!-- bootstrap core css -->
@@ -43,37 +42,42 @@
      <main>
 
         <div class="login-container">
-        <h2>User Details Form</h2>
-        <form method="post" action="/update_user">
-            <input type="hidden" name="user_id" value="{{ id }}">
 
-            <label hidden="hidden">"{{ userID }}" </label> <br>
+           <form action="addItem" method="post">
+               <h2>Add New Item</h2>
 
-           <label for="userId">ID:</label>
-             <input  type="text" name="userId" value="{{ userId }}" readonly><br>
+               <input type="hidden" name="userId" value="{{ request.args.get('userId') }}">
+               <input type="hidden" name="fullname" value="{{ request.args.get('fullname') }}">
+               <input type="hidden" name="is_admin" value="{{ request.args.get('is_admin') }}">
+               <input type="hidden" name="current_time" value="{{ request.args.get('current_time') }}">
 
-            <label for="firstname">First Name:</label>
-             <input type="text" name="lastname" value="{{ lastname }}" required><br>
 
-            <label for="lastname">Last Name:</label>
-            <input type="text" name="lastname" value="{{ lastname }}" required><br>
+                <label for="ItemName">Item Name:</label>
+                <input type="text" id="ItemName" name="ItemName" required>
 
-            <label for="email">Email:</label>
-            <input type="email" name="email" value="{{ email }}" required><br>
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" required>
 
-          <label for="username">username:</label>
-            <input type="text" name="username" value="{{ username }}" required><br>
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" rows="4" cols="30"></textarea>
 
-            <div class="password-container">
-                <label for="password">Password:</label>
-                <div class="input-with-icon">
-                    <input type="password" id="password" name="password" value="{{ passwd }}" required>
-                    <i class="fa fa-eye-slash" aria-hidden="true" onclick="showHidePass()"></i>
-                </div>
-            </div>
+               <label for="imageInput">Image:</label>
+               <input type='file' id="imageInput" name="imageInput" onchange="readURL(this);" />
+                 <img id="blah" src="#" alt="your image" width="150" height="200" />
 
-            <button type="submit">Update User</button>
-        </form>
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" required>
+
+                 <label for="outOfStock">Out Of Stock:</label>
+                 <input type="checkbox" id="outOfStock" name="outOfStock">
+
+
+
+                {% if message %}
+                    <p id="message_err">{{ message }}</p>
+                {% endif %}
+                <button type="submit">Add</button>
+            </form>
         </div>
     </main>
 

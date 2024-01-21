@@ -1,0 +1,57 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+table {
+    width: 44%; /* Adjust the width as needed */
+    border-collapse: collapse;
+    flex: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: transparent;
+    color: black;
+}
+
+.cart-icon {
+    font-size: 24px; /* Adjust the font size as needed */
+    cursor: pointer;
+}
+
+.fa-cart-plus {
+    cursor: pointer;
+}
+button{
+    background-color: transparent;
+     border: 0px solid #ddd;
+}
+.out-of-stock-button {
+    cursor: not-allowed;
+    opacity: 0.5; /* You can adjust the opacity to your preference */
+}
+
+/* Cancel hover effect for the disabled button */
+.fa-cart-plus.out-of-stock-button:hover {
+    color: transparent;
+}
+
+#message_err {
+    text-align: center; /* Optionally, add text-align for centering text within the element */
+}
+
+input
+{
+    background-color: transparent;
+}
