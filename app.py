@@ -5,6 +5,7 @@ from datetime import datetime
 DB = DatabaseConnection()
 app = Flask(__name__,static_folder='static')
 current_time = datetime.now()
+
 ###### GET ######
 @app.route("/")
 def welcome():
@@ -18,11 +19,6 @@ def header():
 @app.route("/footer")
 def footer():
     return render_template("footer.html")
-
-@app.route('/login')
-def show_login_form():
-    message = request.args.get('message', None)
-    return render_template('login.html', message=message)
 
 @app.route('/userDetails')
 def user_details():
@@ -39,18 +35,6 @@ def user_details():
 def about():
     return render_template("about.html", userId=request.args.get('userId', None), fullname=request.args.get('fullname', None),current_time=current_time)
 
-@app.route('/addItem')
-def add_item():
-
-    if request.args.get('userId'):
-
-        user_details = DB.search_in_table_by_id("users",id=request.args.get('userId'))
-        print(f"user_details = > {user_details}")
-        if user_details:
-            if user_details[-1] == 1:
-                return "addItem"
-    print("Warning! User is not Admin try to access!!")
-    abort(403)
 
 @app.route('/logout')
 def logout():
@@ -59,14 +43,13 @@ def logout():
 
 ###### GET ######
 
-###### POST #####
-@app.route('/register')
-def show_register_form():
-    message = request.args.get('message', None)
-    return render_template('register.html', message=message)
-
-@app.route('/login', methods=['POST'])
+### GET & POST ###
+@app.route('/login',methods=['GET','POST'])
 def login():
+    if request.method == 'GET':
+        message = request.args.get('message', None)
+        return render_template('login.html', message=message)
+
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
@@ -78,51 +61,45 @@ def login():
         if is_exist:
             print(f"login successful for user {username} id = {result[0]}")
 
-            return render_template("index.html", userId=result[0], fullname=f"{result[1].title()} {result[2].title()}", current_time=current_time)
+            return render_template("index.html", userId=result[0], fullname=f"{result[1].title()} {result[2].title()}",is_admin={result[6]}, current_time=current_time)
 
         return render_template("login.html", message=result)
 
-@app.route('/register', methods=['POST'])
+@app.route('/register',methods=['GET','POST'])
 def register():
+    if request.method == 'GET':
+        message = request.args.get('message', None)
+        return render_template('register.html', message=message)
+
     if request.method == 'POST':
-        firstname = request.form.get('firstname').lower().strip()
-        lastname = request.form.get('lastname').lower().strip()
-        email = request.form.get('email').lower().strip()
-        username = request.form.get('username').lower().strip()
+        username = request.form.get('username')
         password = request.form.get('password')
-        type = False
-        table_name = "users"
-        print(f"New user registration request with firstname: {firstname}, lastname: {lastname}, email: {email}, username: {username}, password: {password}")
 
-        if not DB.table_exists(f"{table_name}"):
-            print(f"creating table {table_name}")
-            DB.create_table(
-                table_name='users',
-                firstname={'type': 'VARCHAR(255)'},
-                lastname={'type': 'VARCHAR(255)'},
-                email={'type': 'VARCHAR(255)', 'unique': True},
-                username={'type': 'VARCHAR(255)', 'unique': True},
-                password={'type': 'VARCHAR(255)'},
-                userType={'type': 'BOOLEAN'},
-            )
+        print(f"Received login request with username: {username}, password: {password}")
+        is_exist,result = DB.search_in_table_by_fields("users",username=username,password=password)
+        print(f"login checking user: {is_exist} {result}")
 
-        print(f"checking if username {username} already exists")
-        if DB.search_in_table_by_fields(table_name,username=username,email=email)[0]:
-            print(f"User already exists")
-            message = "User already exists"
+        if is_exist:
+            print(f"login successful for user {username} id = {result[0]}")
 
-            return render_template("register.html", message=message)
-            # return message
-        else:
-            print(f"Adding new record to {table_name} table")
-            result, message = DB.insert_into_table(table_name, firstname=firstname, lastname=lastname, email=email,
-                                                   username=username, password=password,UserType=type)
-            if result:
-                message = "New user created"
+            return render_template("index.html", userId=result[0], fullname=f"{result[1].title()} {result[2].title()}",is_admin={result[6]}, current_time=current_time)
 
-        return render_template("register.html", message=message)
+        return render_template("login.html", message=result)
 
-###### POST #####
+### GET & POST ###
+
+### FOR ADMIN ###
+@app.route('/addItem',methods=['GET','POST']))
+def add_item():
+    if request.args.get('userId'):
+        if request.method == 'GET':
+            return render_template('addItem.html')
+        if request.method == 'POST':
+            pass
+
+    print("Warning! User is not Admin try to access!!")
+    abort(403)
+### FOR ADMIN ###
 
 #### ERRORS ####
 

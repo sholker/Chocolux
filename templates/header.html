@@ -4,26 +4,26 @@
 <head>
   <!-- Basic -->
   <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta content="IE=edge" http-equiv="X-UA-Compatible" />
   <!-- Mobile Metas -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
   <!-- Site Metas -->
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
+  <meta content="" name="keywords" />
+  <meta content="" name="description" />
+  <meta content="" name="author" />
 
   <title>ChocoLux</title>
 
   <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css" />
+  <link href="../static/css/bootstrap.css" rel="stylesheet" type="text/css" />
   <!--slick slider stylesheet -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css" rel="stylesheet" />
 
   <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
   <!-- slick slider -->
-  <link rel="stylesheet" href="../static/css/slick-theme.css" />
+  <link href="../static/css/slick-theme.css" rel="stylesheet" />
   <!-- font awesome style -->
   <link href="../static/css/font-awesome.min.css" rel="stylesheet" />
   <!-- Custom styles for this template -->
@@ -40,7 +40,7 @@
           <nav class="navbar navbar-expand-lg custom_nav-container ">
 
               {% if userId %}
-                          <a class="navbar-brand" href="/?userId={{ userId }}&fullname={{ fullname }}">ChocoLux </a>
+                          <a class="navbar-brand" href="/?userId={{ userId }}&fullname={{ fullname }}&is_admin={{ is_admin | default(False) }}&current_time={{ current_time }}">ChocoLux </a>
                       {% else %}
                           <a class="navbar-brand" href="/">ChocoLux</a>
                       {% endif %}
@@ -64,8 +64,8 @@
 
                   </div>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+              data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
               <span class=""> </span>
             </button>
 
@@ -73,18 +73,25 @@
               <ul class="navbar-nav ml-auto">
                   <li class="nav-item active">
                       {% if userId %}
-                          <a class="nav-link" href="/?userId={{ userId }}&fullname={{ fullname }}&current_time={{ current_time }}">Home <span class="sr-only">(current)</span></a>
+                          <a class="nav-link" href="/?userId={{ userId }}&fullname={{ fullname }}&is_admin={{ is_admin | default(False) }}&current_time={{ current_time }}">Home <span class="sr-only">(current)</span></a>
                       {% else %}
                           <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                       {% endif %}
                   </li>
                 <li class="nav-item">
                   {% if userId %}
-                          <a class="nav-link" href="about?userId={{ userId }}&fullname={{ fullname }}&current_time={{ current_time }}">About <span class="sr-only">(current)</span></a>
+                          <a class="nav-link" href="about?userId={{ userId }}&fullname={{ fullname }}&is_admin={{ is_admin | default(False) }}&current_time={{ current_time }}">About <span class="sr-only">(current)</span></a>
                       {% else %}
                           <a class="nav-link" href="about">About</a>
                       {% endif %}
                 </li>
+                    {% if is_admin %}
+                        <li class="nav-item">
+                          <a class="nav-link" href="/addItem?userId={{ userId }}&fullname={{ fullname }}&
+                          is_admin={{ is_admin | default(False) }}&current_time={{ current_time }}">Add New Item</a>
+                        </li>
+                  {% endif %}
+
                 <li class="nav-item">
                   <a class="nav-link" href="chocolate.html">Chocolates</a>
                 </li>
@@ -98,25 +105,24 @@
               <div class="quote_btn-container">
                 <form class="form-inline">
                   <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                      <a href="#"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
+                      <a href="#"><i aria-hidden="true" class="fa fa-shopping-bag"></i></a>
                   </button>
                 </form>
 
                   {% if userId %}
 
-                      <a href="/userDetails?userId={{ userId }}&fullname={{ fullname }}&current_time={{ current_time }}">
-                          <i class="fa fa-user-circle" aria-hidden="true"></i>
+                      <a href="/userDetails?userId={{ userId }}&fullname={{ fullname }}&is_admin={{ is_admin | default(False) }}&current_time={{ current_time }}">
+                          <i aria-hidden="true" class="fa fa-user-circle"></i>
                       </a>
                     <br>
                   <a class="nav-link" href="/logout"> Logout </a>
                   {% else %}
                       <a href="login">
-                          <i class="fa fa-user" aria-hidden="true"></i>
+                          <i aria-hidden="true" class="fa fa-user"></i>
                       </a>
                   {% endif %}
 
               </div>
-
             </div>
           </nav>
         </div>
