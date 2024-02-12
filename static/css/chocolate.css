@@ -4,6 +4,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
 }
 
 table {
@@ -17,12 +18,13 @@ table {
 th, td {
     border: 1px solid #ddd;
     padding: 8px;
-    text-align: left;
+    text-align: center;
 }
 
 th {
     background-color: transparent;
     color: black;
+    text-align: center;
 }
 
 .cart-icon {
@@ -36,6 +38,16 @@ th {
 button{
     background-color: transparent;
      border: 0px solid #ddd;
+}
+#btn:hover{
+    color: blanchedalmond;
+
+}
+#btn{
+    font-size: 20px;
+    cursor: pointer;
+    color: black;
+    border: 1px solid #e8c0b7;
 }
 .out-of-stock-button {
     cursor: not-allowed;

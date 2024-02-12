@@ -90,6 +90,11 @@
                           <a class="nav-link" href="/addItem?userId={{ userId }}&fullname={{ fullname }}&is_admin={{is_admin}}&current_time={{ current_time }}">Add New Item</a>
                         </li>
                   {% endif %}
+                   {% if is_admin %}
+                        <li class="nav-item">
+                          <a class="nav-link" href="/report?userId={{ userId }}&fullname={{ fullname }}&is_admin={{is_admin}}&current_time={{ current_time }}">Report</a>
+                        </li>
+                  {% endif %}
 
                 <li class="nav-item">
                      {% if userId %}
@@ -101,11 +106,15 @@
 
               </ul>
               <div class="quote_btn-container">
-                <form class="form-inline">
-                  <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                      <a href="#"><i aria-hidden="true" class="fa fa-shopping-bag"></i></a>
-                  </button>
-                </form>
+
+
+                <a href="/cart?userId={{ userId }}&fullname={{ fullname }}&is_admin={{ is_admin | default(False) }}&current_time={{ current_time }}">
+                    <button type="button" class="btn my-2 my-sm-0 nav_search-btn">
+                        <i aria-hidden="true" class="fa fa-shopping-bag"></i>
+                    </button>
+                </a>
+
+
 
                   {% if userId %}
 

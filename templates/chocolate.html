@@ -1,84 +1,78 @@
 
 <!DOCTYPE html>
 <html>
-   <link rel="stylesheet" type="text/css" href="../static/css/chocolate.css" />
+<link rel="stylesheet" type="text/css" href="../static/css/chocolate.css" />
 <head>
-  <title>login</title>
-  <!-- Basic -->
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <!-- Mobile Metas -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <!-- Site Metas -->
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
+    <title>login</title>
+    <!-- Basic -->
+    <meta charset="utf-8" />
 
-  <title>ChocoLux</title>
+    <title>ChocoLux</title>
 
 </head>
 
 <body>
 
-     {% include 'header.html' %}
+{% include 'header.html' %}
 
- <main>
-        <div class="login-container">
-            {% if headers %}
-            <br>
-            {% if message %}
-                <p id="message_err">{{ message }}</p>
-            {% endif %}
-            <table class="item-table">
-                <thead>
-                    <tr>
-                        <th>Item Name</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for row in rows %}
-                    <tr>
-                        <form action="/shop" method="post">
-
-                            <input id="userId" name="userId" type="text" value="{{ userId }}" hidden="hidden">
-                            <input id="fullname" name="fullname" type="text" value="{{ fullname }}" hidden="hidden">
-
-                        <td>{{ row[1] }}</td>
-                            <input hidden="hidden" type="text" id="item_id" name="item_id" value="{{ row[0] }}">
-                        <td><img src="{{ url_for('static', filename=row[4][7:]) }}" alt="Item Image" class="item-image" width="150" height="150">
+<main>
+    <div class="login-container">
+        {% if found %}
+        <br>
+        {% if message %}
+        <p id="message_err">{{ message }}</p>
+        {% endif %}
+        <table class="item-table">
+            <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in rows %}
+            <tr>
+                <form action="/shop" method="post">
+                    <td>{{ row[1] }}</td>
+                    <input hidden="hidden" type="text" id="item_id" name="item_id" value="{{ row[0] }}">
+                    <td><img src="{{ url_for('static', filename=row[4][7:]) }}" alt="Item Image" class="item-image" width="150" height="150">
                         <p> {{ row[3] }} </p>
-                        </td>
+                    </td>
 
-                        <td>{{ row[2] }} $</td>
-
-                            <!-- if is in stock -->
-                            {% if row[6] == 0 %}
-                                <td><button type="submit"><i class="fa fa-cart-plus fa-5x" aria-hidden="true"></i></button>
-                               <input type="number" name="quantity" value="1" min="1" max="{{ row[5] }}" step="1">
-                            {% else %}
-
-                                <td><button type="submit" disabled><i class="fa fa-cart-plus fa-5x out-of-stock-button" aria-hidden="true"></i></button>
+                    <td>$ {{ row[2] }}</td>
+                    <!--  check if the item is out of stack -->
+                    <!-- zero is in stack, 1 is out of stack-->
+                    {% if row[6] != 0 %}
+                    <td><button type="submit"><i class="fa fa-cart-plus fa-5x" aria-hidden="false"></i></button>
+                        <input type="number" name="quantity" value="1" min="1" max="{{ row[5] }}" step="1">
+                    {% else %}
+                         <td><button type="submit" disabled><i class="fa fa-cart-plus fa-5x out-of-stock-button" aria-hidden="true"></i></button>
                         <label> This item is out of stock :( </label></td>
-                             <input type="number" id="quantity" name="quantity" value="0" min="1" max="{{ row[5] }}" step="1" hidden="hidden">
-                            {% endif %}
-                        </td>
-                        </form>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    <input type="number" id="quantity" name="quantity" value="0" min="0" max="{{ row[5] }}" step="1" hidden="hidden">
 
-            {% else %}
+                    {% endif %}
+
+                    </td>
+                </form>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {% else %}
+        {% if message != 'None' %}
+        <div>
             <p>{{ message }}</p>
-            {% endif %}
         </div>
-    </main>
- <br>
-    <!-- Include footer -->
-    {% include 'footer.html' %}
+        {% endif %}
+        {% endif %}
+    </div>
+</main>
+<br>
+<!-- Include footer -->
+{% include 'footer.html' %}
 
 
 </body>

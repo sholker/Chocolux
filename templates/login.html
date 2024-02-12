@@ -57,7 +57,12 @@
                 </div>
             </div>
                 {% if message %}
-                    <p id="message_err">{{ message }}</p>
+               {% if message != 'None' %}
+                <div>
+                   <p id="message_err">{{ message }}</p>
+                </div>
+              {% endif %}
+
                 {% endif %}
                 <button type="submit">Login</button>
                 <p>Don't have an account? <a href="register">Sign up</a></p>
@@ -77,9 +82,6 @@
   <!-- custom js -->
   <script  src="../static/js/custom.js"></script>
   <script  src="../static/js/userFeature.js"></script>
-  <!-- Google Map -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
-  <!-- End Google Map -->
 
 </body>
 
