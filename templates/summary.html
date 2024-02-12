@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" type="text/css" href="../static/css/chocolate.css" />
+<head>
+    <title>ShoppingCart</title>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+
+    <title>ChocoLux</title>
+
+</head>
+
+<body>
+
+{% include 'header.html' %}
+
+<main>
+    <div class="login-container">
+        {% if headers %}
+        <br>
+        {% if message %}
+        <p id="message_err">{{ message }}</p>
+        {% endif %}
+        <table class="item-table">
+            <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Price (Per One)</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% set sum = 0 %}
+            {% for row in rows %}
+            <tr>
+                <td>{{ row[3] }}<br>
+                    <img src="{{ url_for('static', filename=row[4][7:]) }}" alt="Item Image" class="item-image" width="50" height="50">
+                </td>
+                <td>$ {{ row[5] }}</td>
+                <td>{{ row[6] }}</td>
+                <td>$ {{ row[7] }}</td>
+                <td>
+                    <form action="/cart?action=delete" method="post">
+                        <input type="hidden" name="cart_ID" value="{{ row[1] }}">
+                        <button type="submit" ><i class="fa fa-trash fa-3x" aria-hidden="true"></i></button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+
+            <tr class="total-row">
+                <td colspan="2"> Total Sum: {{ "${:,.2f}".format(total) }}
+                    <form action=/cart?action=order" method="post">
+                        <button type="submit" class="btn" > Order </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+
+        {% else %}
+        {% if message != 'None' %}
+        <div>
+            <p>{{ message }}</p>
+        </div>
+        {% endif %}
+        {% endif %}
+    </div>
+</main>
+<br>
+<!-- Include footer -->
+{% include 'footer.html' %}
+
+
+</body>
+
+</html>
+

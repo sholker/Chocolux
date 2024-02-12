@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" type="text/css" href="../static/css/chocolate.css" />
+<head>
+    <title>ShoppingCart</title>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+
+    <title>ChocoLux</title>
+
+</head>
+
+<body>
+
+{% include 'header.html' %}
+
+<main>
+    <div class="login-container">
+
+        {% if found %}
+        <br>
+        {% if message %}
+        {% if message != 'None' %}
+
+        <p id="message_err">{{ message }}</p>
+        {% endif %}
+        {% endif %}
+
+        <table class="item-table">
+            <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Price (Per One)</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in rows %}
+            <tr>
+                <td style="width: 365px;">{{ row[2] }}<br>
+                    <img src="{{ url_for('static', filename=row[3][7:]) }}" alt="Item Image" class="item-image" width="50" height="50">
+                </td>
+                <td style="width: 765px;">$ {{ row[4] }}</td>
+                <td>{{ row[5] }}</td>
+                <td style="width: 365px; text-align: center">$ {{ row[6] }}</td>
+                <td>
+                    <form action="/cart?action=delete" method="post">
+                        <input type="hidden" name="cart_ID" value="{{ row[1] }}">
+                        <button type="submit" ><i class="fa fa-trash fa-3x" aria-hidden="true"></i></button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+
+            <tr class="total-row">
+                <td colspan="2"> Total Sum: {{ "${:,.2f}".format(total) }}
+                    <form action="/order" method="GET">
+                        <input type="hidden" name="total" value="{{ total }}">
+                        <button type="submit" id="btn" > Order </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+
+        {% else %}
+        {% if message != 'None' %}
+        <div>
+            <p>{{message}}</p>
+        </div>
+        {% endif %}
+        {% endif %}
+    </div>
+</main>
+<br>
+<!-- Include footer -->
+{% include 'footer.html' %}
+
+
+</body>
+
+</html>
+

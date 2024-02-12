@@ -1,0 +1,15 @@
+#thanks {
+  color: #AD1B45;
+  font-family: 'Bungee Shade', cursive;
+  font-size: 35px;
+  text-align: center;
+}
+
+a:link, a:visited {
+  color: #F1AE28;
+  background-color: none;
+  text-decoration: none;
+  font-family: 'Bungee Shade', cursive;
+  font-size: 35px;
+  display: inline-block;
+}

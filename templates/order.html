@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>order</title>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+
+
+    <link rel="stylesheet" type="text/css" href="../static/css/login.css" />
+    <link rel="stylesheet" type="text/css" href="../static/css/style.scss" />
+
+</head>
+
+<body>
+
+{% include 'header.html' %}
+
+<main>
+
+    <div class="login-container">
+        {% if total != 0 %}
+        <form action="order" method="post">
+            <h2>Check Out</h2>
+            <input type="text" id="userID" name="userID" hidden="hidden", value="{{userID}}">
+            <label> Total: {{ total }}</label>
+            <hr style="width:90px;text-align:left;margin-left:0">
+            <h5>Shipping Details</h5>
+            <label for="address">Address</label>
+
+            <input type="text" id="address" name="address" {% if found_address %} value="{{ address_data[2] }}" {% endif %} required>
+
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" {% if found_address %} value="{{ address_data[3] }}" {% endif %} required>
+
+            <label for="country">Country:</label>
+            <select id="country" name="country" class="form-control">
+                <option value="United States" {% if found_address and address_data[4] == "United States" %} selected {% endif %}>United States</option>
+                <option value="Israel" {% if found_address and address_data[4] == "Israel" %} selected {% endif %}>Israel</option>
+            </select>
+
+            <hr>
+            <h5>Payment:</h5>
+            <label for="cardNumber">Card Number:</label>
+            <input type="text" id="cardNumber" name="cardNumber" pattern='^\d{4} \d{4} \d{4} \d{4}$' {% if found_payment %} value="{{ payment_data[2] }}" {% endif %}  required>
+            <label for="expiration">Expiration Date (MM/YY):</label>
+            <input type="month" id="expiration" name="expiration" min="2023-03" max="2032-02" {% if found_payment %} value="{{ payment_data[3] }}" {% endif %}  />
+
+            <label for="securityCode">Security Code:</label>
+            <input type="number"  pattern='^\d{3}$' id="securityCode" name="securityCode"  {% if found_payment %} value="{{ payment_data[4] }}" {% endif %} required>
+
+            {% if message %}
+            {% if message != 'None' %}
+            <div>
+                <p id="message_err">{{ message }}</p>
+            </div>
+            {% endif %}
+            {% endif %}
+            <button type="submit">Pay Now</button>
+        </form>
+        {% endif %}
+
+        {% if message != 'None' %}
+        <div>
+            <p>{{ message }}</p>
+        </div>
+        {% endif %}
+    </div>
+</main>
+
+<!-- Include footer -->
+{% include 'footer.html' %}
+
+
+<script  src="../static/js/userFeature.js"></script>
+
+
+</body>
+
+</html>
