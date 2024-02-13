@@ -1,4 +1,4 @@
-# Author: Ori Shinsholker Ilana Gmal and Daniel Roie Machluf
+
 
 from flask import Flask, request, render_template, abort,redirect # import Flask package for web app
 from database_com import DatabaseConnection # import DatabaseConnection class from database_com.py

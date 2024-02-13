@@ -1,4 +1,4 @@
-# Actor: Ori Shinsholker, Ilana Jamil, Daniel Roie Machluf
+
 # The packkge databse_com is imported in app.py for mangement of database connection
 import mysql.connector as ms # import package for mysql connector DB
 
