@@ -8,7 +8,7 @@
 
 ![about-img.png](static%2Fimages%2Fabout-img.png)
 
-ChocoLux is a web application for a chocolate company, allowing users to view and purchase various chocolate items.
+#### ChocoLux is a web application for a chocolate company, allowing users to view and purchase various chocolate items.
 
 ## Table of Contents
 
