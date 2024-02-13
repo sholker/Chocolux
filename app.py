@@ -1,5 +1,4 @@
 
-
 from flask import Flask, request, render_template, abort,redirect # import Flask package for web app
 from database_com import DatabaseConnection # import DatabaseConnection class from database_com.py
 from datetime import datetime # import datetime package for time
@@ -215,6 +214,9 @@ def shop():
             message = "Error retrieving data from the database" # set the message to the error message
 
         if request.method == 'POST': # when the form is submitted
+            if glob_var.get('user_ID', None) is None: # if the user is not logged in
+                message = "Need to be logged in to buy items" # set the message to the error message
+                return redirect(f"/shop?message={message}", code=302) # redirect to the chocolate page
             item = request.form.get('item_id') # Get the item from the form data
             quantity = request.form.get('quantity') # Get the quantity from the form data
             message = f"Adding to shopping cart x{quantity}" # Set the message to the quantity

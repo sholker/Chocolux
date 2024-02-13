@@ -60,6 +60,9 @@ ChocoLux is a web application for a chocolate company, allowing users to view an
 >* [user_order_total](./DB_Structure/chocolatestore_SQL/user_order_total.sql) - A view that joins all the tables above, 
 and shows the total amount of orders per user.
 
+#### Sqeuence Diagrams:
+![sequence _diagram.jpeg](DB_Structure%2Fsequence%20_diagram.jpeg)
+
 ## Getting Started
 
 ### Prerequisites
