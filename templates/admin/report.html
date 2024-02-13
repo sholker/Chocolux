@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" type="text/css" href="../static/css/chocolate.css" />
+<head>
+    <title>ShoppingCart</title>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+
+    <title>ChocoLux</title>
+
+</head>
+
+<body>
+
+{% include 'header.html' %}
+
+<main>
+    <div class="login-container">
+        {% if found %}
+        <br>
+        {% if message %}
+        <p id="message_err">{{ message }}</p>
+        {% endif %}
+        <table class="item-table">
+            <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Fist Name</th>
+                <th>Last Name</th>
+                <th>Count Orders</th>
+                <th>Sum Total Orders</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in rows %}
+            <tr>
+
+                <td style="width: 365px;">{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+                <td>$ {{ row[5] }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+        {% else %}
+        {% if message != 'None' %}
+        <div>
+            <p>{{ message }}</p>
+        </div>
+        {% endif %}
+        {% endif %}
+    </div>
+</main>
+<br>
+<!-- Include footer -->
+{% include 'footer.html' %}
+
+
+</body>
+
+</html>
+

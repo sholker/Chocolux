@@ -1,6 +1,6 @@
 # ChocoLux Project
 
-> Create by Ori Shai, Ilana Jamal and Daniel Machluf
+> Create by Ori Shai, Ilana Jamil and Daniel Machluf
 
 --------
 
@@ -37,7 +37,7 @@ ChocoLux is a web application for a chocolate company, allowing users to view an
 ### DB Structure:
 ![DB_tables](./DB_Structure/EER.png)
 
-* [EER Diagram](DB_Structure/EER.mwb)</br>
+* [EER Diagram](DB_Structure/EER.mwb)
 
 * [DB Structure](DB_Structure/structure.mwb)
 #### SQL Quiries:

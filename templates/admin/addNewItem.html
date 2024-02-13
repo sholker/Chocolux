@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>addNewItem</title>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+
+  <!-- bootstrap core css -->
+ <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css" />
+  <!--slick slider stylesheet -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
+  <!-- slick slider -->
+
+  <link rel="stylesheet" href="../static/css/slick-theme.css" />
+  <!-- font awesome style -->
+  <link href="../static/css/font-awesome.min.css" rel="stylesheet" />
+  <!-- Custom styles for this template -->
+  <link href="../static/css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="../static/css/responsive.css" rel="stylesheet" />
+   <link rel="stylesheet" type="text/css" href="../static/css/login.css" />
+
+</head>
+
+<body>
+
+     {% include 'header.html' %}
+
+     <main>
+
+        <div class="login-container">
+
+           <form action="addItem" method="post">
+               <h2>Add New Item</h2>
+
+               <input type="hidden" name="userId" value="{{ request.args.get('userId') }}">
+               <input type="hidden" name="fullname" value="{{ request.args.get('fullname') }}">
+               <input type="hidden" name="is_admin" value="{{ request.args.get('is_admin') }}">
+               <input type="hidden" name="current_time" value="{{ request.args.get('current_time') }}">
+
+
+                <label for="ItemName">Item Name:</label>
+                <input type="text" id="ItemName" name="ItemName" required>
+
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" required>
+
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" rows="4" cols="30"></textarea>
+
+               <label for="imageInput">Image:</label>
+               <input type='file' id="imageInput" name="imageInput" onchange="readURL(this);" />
+                 <img id="blah" src="#" alt="your image" width="150" height="200" />
+
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" required>
+
+                 <label for="outOfStock">Out Of Stock:</label>
+                 <input type="checkbox" id="outOfStock" name="outOfStock">
+
+
+
+                {% if message %}
+                    {% if message != 'None' %}
+                    <div>
+                      <p id="message_err">{{ message }}</p>
+                    </div>
+                  {% endif %}
+                {% endif %}
+                <button type="submit">Add</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Include footer -->
+    {% include 'footer.html' %}
+
+  <!-- jQery -->
+  <script  src="../static/js/jquery-3.4.1.min.js"></script>
+  <!-- bootstrap js -->
+  <script  src="../static/js/bootstrap.js"></script>
+  <!-- slick slider -->
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js"></script>
+  <!-- custom js -->
+  <script  src="../static/js/custom.js"></script>
+  <script  src="../static/js/userFeature.js"></script>
+
+
+</body>
+
+</html>
