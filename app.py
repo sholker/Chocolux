@@ -1,4 +1,3 @@
-
 from flask import Flask, request, render_template, abort,redirect # import Flask package for web app
 from database_com import DatabaseConnection # import DatabaseConnection class from database_com.py
 from datetime import datetime # import datetime package for time
@@ -50,20 +49,35 @@ def footer():
     return render_template("footer.html")
 
 
-@app.route('/userDetails') # define the route for the user details page
+@app.route('/userDetails', methods=['GET', 'POST']) # define the route for the user details page
 def user_details():
+    if glob_var.get('client_ID',None) is None: # if the user is not logged in
+        print("Warning! User is not login try to access to user details!!")
+        abort(403)  # abort the request with a 403 error code
+    message = request.args.get('message', None) # get the message from the url
+    if request.method == 'POST':
+        result, err = DB.update_table_by_fields('users', id=glob_var.get('client_ID'),
+                                                firstname=request.form.get('firstname'),lastname=request.form.get('lastname'),
+                                                email=request.form.get('email'),username=request.form.get('username'),
+                                                password=request.form.get('password')) # update the user details in the database
+        if not result: # if the update was not successful
+            message = f"Error: {err}"
+        else:
+            message = "User details was updated successfully"
+        return redirect(f"/userDetails?message={message}",code=302) # redirect to the user details page with the message
+
     user_details = DB.search_in_table_by_fields("users", id=glob_var.get('client_ID',None)) # get the user details from the database
     print(f"user_details = > {user_details}") # print the user details to console for debugging
     # the user details from the database look like this:
     # (17, 'admin', 'admin', 'admin@gmail.com', 'admin', 'admin', 1)
     # ( 16,'matthew', 'murdock', 'daredevil@gmail.com', 'daredevil', '123', 0)
 
-    user_id, firstname, lastname, email, username, passwd, is_admiin = user_details # unpack the user details
+    user_id, firstname, lastname, email, username, passwd, is_admiin = user_details[1] # unpack the user details
 
     # return the user details page with the user details
     return render_template('userDetails.html', userId=user_id, firstname=firstname, lastname=lastname,
                            email=email, username=username, passwd=passwd,
-                           fullname=request.args.get('fullname', f"{firstname} {lastname}"), current_time=glob_var.get('current_time',datetime.now()))
+                           fullname=request.args.get('fullname', f"{firstname} {lastname}"), current_time=glob_var.get('current_time',datetime.now()), message=message)
 
 
 @app.route('/about') # define the route for the about page
@@ -217,6 +231,7 @@ def shop():
             if glob_var.get('user_ID', None) is None: # if the user is not logged in
                 message = "Need to be logged in to buy items" # set the message to the error message
                 return redirect(f"/shop?message={message}", code=302) # redirect to the chocolate page
+
             item = request.form.get('item_id') # Get the item from the form data
             quantity = request.form.get('quantity') # Get the quantity from the form data
             message = f"Adding to shopping cart x{quantity}" # Set the message to the quantity
@@ -316,6 +331,10 @@ def add_2_shopping_cart(item_id, quantity):
 @app.route('/cart', methods=['GET', 'POST']) # this route will show the shopping cart
 def cart():
     try:
+        if glob_var.get('client_ID', None) is None:  # if the user is not logged in
+            print("Warning! User is not login try to access to user details!!")
+            abort(403)  # abort the request with a 403 error code
+
         message = request.args.get('message', None) # get the message from request args
 
         table_name = 'shopping_cart_details'  # Replace with your actual table name
@@ -406,6 +425,10 @@ def tank():
 
 @app.route('/order', methods=['GET','POST']) # define the order route
 def order():
+    if glob_var.get('client_ID',None) is None: # if the user is not logged in
+        print("Warning! User is not login try to access to user details!!")
+        abort(403)  # abort the request with a 403 error code
+
     # set total to 0, so that we can show an error message if the total is 0
     total = glob_var.get('total', 0)
 

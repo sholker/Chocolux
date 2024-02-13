@@ -74,7 +74,7 @@
 
 
                 {% if message %}
-                    {% if message != 'None' %}
+                    {% if message != 'None' and message != none %}
                     <div>
                       <p id="message_err">{{ message }}</p>
                     </div>

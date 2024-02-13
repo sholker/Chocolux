@@ -2,140 +2,131 @@
 <html>
 
 <head>
-  <!-- Basic -->
-  <meta charset="utf-8" />
-  <meta content="IE=edge" http-equiv="X-UA-Compatible" />
-  <!-- Mobile Metas -->
-  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
-  <!-- Site Metas -->
-  <meta content="" name="keywords" />
-  <meta content="" name="description" />
-  <meta content="" name="author" />
+    <!-- Basic -->
+    <meta charset="utf-8" />
 
-  <title>ChocoLux</title>
+    <title>header</title>
 
-  <!-- bootstrap core css -->
-  <link href="../static/css/bootstrap.css" rel="stylesheet" type="text/css" />
-  <!--slick slider stylesheet -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css" rel="stylesheet" />
+    <!-- bootstrap core css -->
+    <link href="../static/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <!--slick slider stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css" rel="stylesheet" />
 
-  <!-- fonts style -->
-  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
-  <!-- slick slider -->
-  <link href="../static/css/slick-theme.css" rel="stylesheet" />
-  <!-- font awesome style -->
-  <link href="../static/css/font-awesome.min.css" rel="stylesheet" />
-  <!-- Custom styles for this template -->
-  <link href="../static/css/style.css" rel="stylesheet" />
-  <!-- responsive style -->
-  <link href="../static/css/responsive.css" rel="stylesheet" />
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
+    <!-- slick slider -->
+    <link href="../static/css/slick-theme.css" rel="stylesheet" />
+    <!-- font awesome style -->
+    <link href="../static/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="../static/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="../static/css/responsive.css" rel="stylesheet" />
 </head>
 
 <body>
 
-  <div class="main_body_content">
-  <header class="header_section">
+<div class="main_body_content">
+    <header class="header_section">
         <div class="container-fluid">
-          <nav class="navbar navbar-expand-lg custom_nav-container ">
+            <nav class="navbar navbar-expand-lg custom_nav-container ">
 
-              {% if userId %}
-                          <a class="navbar-brand" href="/?userId={{ userId }}&fullname={{ fullname }}&is_admin={{ is_admin | default(False) }}&current_time={{ current_time }}">ChocoLux </a>
-                      {% else %}
-                          <a class="navbar-brand" href="/">ChocoLux</a>
-                      {% endif %}
-            </a>
+                {% if userId %}
+                <a class="navbar-brand" href="/?userId={{ userId }}&fullname={{ fullname }}&is_admin={{ is_admin | default(False) }}&current_time={{ current_time }}">ChocoLux </a>
+                {% else %}
+                <a class="navbar-brand" href="/">ChocoLux</a>
+                {% endif %}
+                </a>
 
-              <div>
-                 {% if userId %}
+                <div>
+                    {% if userId %}
                     <label>
 
                         {% set current_hour = current_time.hour %}
                         {% if current_hour < 12 %}
-                            Good morning ,
+                        Good morning ,
                         {% elif current_hour < 17 %}
-                            Good afternoon,
+                        Good afternoon,
                         {% else %}
-                            Good evening,
+                        Good evening,
                         {% endif %}
                         {{ fullname | default('Default Full Name') }}
                     </label>
-                {% endif %}
+                    {% endif %}
 
-                  </div>
+                </div>
 
-            <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
-              data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
-              <span class=""> </span>
-            </button>
+                <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+                        data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+                    <span class=""> </span>
+                </button>
 
-            <div class="collapse navbar-collapse " id="navbarSupportedContent">
-              <ul class="navbar-nav ml-auto">
-                  <li class="nav-item active">
-                      {% if userId %}
-                          <a class="nav-link" href="/?userId={{ userId }}&fullname={{ fullname }}&is_admin={{ is_admin | default(False) }}&current_time={{ current_time }}">Home <span class="sr-only">(current)</span></a>
-                      {% else %}
-                          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                      {% endif %}
-                  </li>
-                <li class="nav-item">
-                  {% if userId %}
-                          <a class="nav-link" href="about?userId={{ userId }}&fullname={{ fullname }}&is_admin={{ is_admin | default(False) }}&current_time={{ current_time }}">About <span class="sr-only">(current)</span></a>
-                      {% else %}
-                          <a class="nav-link" href="about">About</a>
-                      {% endif %}
-                </li>
-                    {% if is_admin %}
-                        <li class="nav-item">
-                          <a class="nav-link" href="/addItem?userId={{ userId }}&fullname={{ fullname }}&is_admin={{is_admin}}&current_time={{ current_time }}">Add New Item</a>
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            {% if userId %}
+                            <a class="nav-link" href="/?userId={{ userId }}&fullname={{ fullname }}&is_admin={{ is_admin | default(False) }}&current_time={{ current_time }}">Home <span class="sr-only">(current)</span></a>
+                            {% else %}
+                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                            {% endif %}
                         </li>
-                  {% endif %}
-                   {% if is_admin %}
                         <li class="nav-item">
-                          <a class="nav-link" href="/report?userId={{ userId }}&fullname={{ fullname }}&is_admin={{is_admin}}&current_time={{ current_time }}">Report</a>
+                            {% if userId %}
+                            <a class="nav-link" href="about?userId={{ userId }}&fullname={{ fullname }}&is_admin={{ is_admin | default(False) }}&current_time={{ current_time }}">About <span class="sr-only">(current)</span></a>
+                            {% else %}
+                            <a class="nav-link" href="about">About</a>
+                            {% endif %}
                         </li>
-                  {% endif %}
+                        {% if is_admin %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/addItem?userId={{ userId }}&fullname={{ fullname }}&is_admin={{is_admin}}&current_time={{ current_time }}">Add New Item</a>
+                        </li>
+                        {% endif %}
+                        {% if is_admin %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/report?userId={{ userId }}&fullname={{ fullname }}&is_admin={{is_admin}}&current_time={{ current_time }}">Report</a>
+                        </li>
+                        {% endif %}
 
-                <li class="nav-item">
-                     {% if userId %}
-                          <a class="nav-link" href="shop?userId={{ userId }}&fullname={{ fullname }}&is_admin={{ is_admin | default(False) }}&current_time={{ current_time }}">Chocolates <span class="sr-only">(current)</span></a>
-                      {% else %}
-                          <a class="nav-link" href="shop">Chocolates</a>
-                      {% endif %}
-                </li>
+                        <li class="nav-item">
+                            {% if userId %}
+                            <a class="nav-link" href="shop?userId={{ userId }}&fullname={{ fullname }}&is_admin={{ is_admin | default(False) }}&current_time={{ current_time }}">Chocolates <span class="sr-only">(current)</span></a>
+                            {% else %}
+                            <a class="nav-link" href="shop">Chocolates</a>
+                            {% endif %}
+                        </li>
 
-              </ul>
-              <div class="quote_btn-container">
-
-
-                <a href="/cart?userId={{ userId }}&fullname={{ fullname }}&is_admin={{ is_admin | default(False) }}&current_time={{ current_time }}">
-                    <button type="button" class="btn my-2 my-sm-0 nav_search-btn">
-                        <i aria-hidden="true" class="fa fa-shopping-bag"></i>
-                    </button>
-                </a>
+                    </ul>
+                    <div class="quote_btn-container">
 
 
 
-                  {% if userId %}
 
-                      <a href="/userDetails?userId={{ userId }}&fullname={{ fullname }}&is_admin={{ is_admin | default(False) }}&current_time={{ current_time }}">
-                          <i aria-hidden="true" class="fa fa-user-circle"></i>
-                      </a>
-                    <br>
-                  <a class="nav-link" href="/logout"> Logout </a>
-                  {% else %}
-                      <a href="login">
-                          <i aria-hidden="true" class="fa fa-user"></i>
-                      </a>
-                  {% endif %}
+                        {% if userId %}
+                        <a href="/cart?userId={{ userId }}&fullname={{ fullname }}&is_admin={{ is_admin | default(False) }}&current_time={{ current_time }}">
+                            <button type="button" class="btn my-2 my-sm-0 nav_search-btn">
+                                <i aria-hidden="true" class="fa fa-shopping-bag"></i>
+                            </button>
+                        </a>
+                        <a href="/userDetails?userId={{ userId }}&fullname={{ fullname }}&is_admin={{ is_admin | default(False) }}&current_time={{ current_time }}">
+                            <i aria-hidden="true" class="fa fa-user-circle"></i>
+                        </a>
+                        <br>
+                        <a class="nav-link" href="/logout"> Logout </a>
+                        {% else %}
+                        <a href="login">
+                            <i aria-hidden="true" class="fa fa-user"></i>
+                        </a>
+                        {% endif %}
 
-              </div>
-            </div>
-          </nav>
+                    </div>
+                </div>
+            </nav>
         </div>
-      </header>
+    </header>
 
-  </div>
+</div>
 </body>
 
 </html>
