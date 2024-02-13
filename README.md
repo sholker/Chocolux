@@ -1,6 +1,6 @@
 # ChocoLux Project
 
-> Create by Ori Shai, Ilana Jamil and Daniel Machluf
+> Create by Ori Shai
 
 --------
 
